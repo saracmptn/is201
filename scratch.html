@@ -1,23 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Scratch Page</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid justify-content-start">
-                <a class="navbar-brand" href="index.html">Back to Resume</a>
-            </div>
-        </nav>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astronomy & Stargazing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="css/scratch.css" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <ul class="nav-bar">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#getting-started">Getting Started</a></li>
+            <li><a href="#steps">Steps</a></li>
+            <li><a href="#constellations">Constellations</a></li>
+            <li><a href="#video">Video</a></li>
+            <li><a href="#graphic">Stars</a></li>
+            <li><a href="index.html">Resume</a></li>
+            <li><a href="recipe.html">Webapp</a></li>
+        </ul>
+    </nav>
 
-        <main class="container py-4">
-            <h1 class="h2">Scratch Page</h1>
-        </main>
-    </body>
+    <header id="home" class="hero">
+        <p class="hero-kicker">Night Sky Essentials</p>
+        <h1>Guide to Astronomy</h1>
+        <p class="hero-subtitle">Explore the night sky and discover the universe with confidence.</p>
+    </header>
+
+    <main>
+        <section id="getting-started" class="panel">
+            <h2>Getting Started with Stargazing</h2>
+            <p>Stargazing is a relaxing and fascinating hobby. All you need is a clear sky and curiosity.</p>
+        </section>
+
+        <section id="steps" class="panel">
+            <h2>Steps to Begin Stargazing</h2>
+            <ol>
+                <li>
+                    <h3>Find a Good Location</h3>
+                    <ul>
+                        <li>Away from city lights</li>
+                        <li>High elevation if possible</li>
+                        <li>Clear view of the horizon</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Choose the Right Time</h3>
+                    <ul>
+                        <li>New moon nights are best</li>
+                        <li>Late evening to early morning</li>
+                        <li>Check weather conditions</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Bring Basic Equipment</h3>
+                    <ul>
+                        <li>Binoculars or telescope</li>
+                        <li>Star map or app</li>
+                        <li>Warm clothing and snacks</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+
+        <section id="constellations" class="panel">
+            <h2>Popular Constellations</h2>
+            <div class="image-gallery">
+                <article class="image-card">
+                    <img src="assets/img/orion.png" alt="Orion constellation">
+                    <p>Orion</p>
+                </article>
+                <article class="image-card">
+                    <img src="assets/img/ursamajor.png" alt="Ursa Major constellation">
+                    <p>Ursa Major</p>
+                </article>
+                <article class="image-card">
+                    <img src="assets/img/cassiopeia.png" alt="Cassiopeia constellation">
+                    <p>Cassiopeia</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="video" class="panel">
+            <h2>Introduction to Astronomy</h2>
+            <div class="video-container">
+                <iframe
+                    src="https://www.youtube.com/embed/0rHUDWjR5gg?si=VynJkywMv_De6exq"
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section id="graphic" class="panel">
+            <h2>Types of Stars</h2>
+            <div class="tableau-wrap">
+                <div class='tableauPlaceholder' id='viz1776195110739'>
+                    <noscript>
+                        <a href='#'><img alt='Dashboard 1' src='https://public.tableau.com/static/images/St/Stars_16065990729940/Dashboard1/1_rss.png' style='border: none' /></a>
+                    </noscript>
+                    <object class='tableauViz'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' />
+                        <param name='site_root' value='' />
+                        <param name='name' value='Stars_16065990729940/Dashboard1' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/St/Stars_16065990729940/Dashboard1/1.png' />
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='en-US' />
+                    </object>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a class="panel" href="#home">Return to Home</a>
+    </footer>
+
+    <script type='text/javascript'>
+        var divElement = document.getElementById('viz1776195110739');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        if (divElement.offsetWidth > 900) {
+            vizElement.style.width = '100%';
+            vizElement.style.height = '760px';
+        } else if (divElement.offsetWidth > 540) {
+            vizElement.style.width = '100%';
+            vizElement.style.height = '680px';
+        } else {
+            vizElement.style.width = '100%';
+            vizElement.style.height = '980px';
+        }
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+</body>
 </html>

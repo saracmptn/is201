@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Recipe Finder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root {
+  --bg-solid: #d6f4ff;
+  --surface: #f4fcff;
+  --surface-strong: #ffffff;
+  --text: #102437;
+  --muted: #28506d;
+  --border: #aee3fb;
+  --primary: #00a9de;
+  --primary-hover: #0096c6;
+  --accent: #ff8f1f;
+  --chip: #ffdcb7;
+  --chip-text: #6e3100;
+  --shadow: 0 18px 40px rgba(0, 169, 222, 0.22);
+}
+body {
+  font-family: "Trebuchet MS", "Avenir Next", "Segoe UI", sans-serif;
+  background: var(--bg-solid);
+  margin: 0;
+  padding: 28px 20px;
+  color: var(--text);
+}
+h1 {
+  text-align: center;
+  margin-bottom: 8px;
+  font-size: clamp(1.8rem, 2vw + 1rem, 2.5rem);
+  letter-spacing: 0.02em;
+}
+.subtitle {
+  text-align: center;
+  color: var(--muted);
+  margin: 0 0 22px;
+  font-size: 0.98rem;
+}
+.container {
+  max-width: 1100px;
+  margin: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: clamp(18px, 2vw, 30px);
+}
+/* INPUT */
+.input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #d6d3d1;
+  background: var(--surface-strong);
+  font-family: inherit;
+  font-size: 15px;
+}
+input:focus {
+  outline: 2px solid rgba(0, 169, 222, 0.28);
+  border-color: var(--primary);
+}
+/* BUTTONS */
+button {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  margin-top: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 169, 222, 0.3);
+}
+/* TAGS */
+.tag {
+  display: inline-block;
+  background: var(--chip);
+  color: var(--chip-text);
+  padding: 6px 12px;
+  margin: 5px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid #fed7aa;
+  font-weight: 600;
+}
+/* FILTERS */
+.filters {
+  margin: 22px 0 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.filters button.active {
+  background: var(--accent);
+  color: #3d1a00;
+  font-weight: 700;
+}
+.search-row {
+  display: flex;
+  justify-content: center;
+  margin: 14px 0 6px;
+}
+.search-btn {
+  min-width: 220px;
+  font-size: 1rem;
+  color: #3a1700;
+  background: linear-gradient(135deg, #ffbd70, #ff8f1f);
+}
+.search-btn:hover {
+  background: linear-gradient(135deg, #ffb359, #ff8610);
+}
+/* PANTRY */
+.pantry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+.pantry button {
+  background: #c8eeff;
+  color: #005b7a;
+  margin-top: 0;
+}
+/* GRID */
+.recipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.status-card {
+  grid-column: 1 / -1;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 14px;
+  padding: 20px;
+  color: #334155;
+  text-align: center;
+}
+.status-card.error {
+  background: #fff1f2;
+  border-color: #fecdd3;
+  color: #9f1239;
+}
+.status-card.loading {
+  background: #e6f7ff;
+  border-color: #9ddcff;
+  color: #055e83;
+}
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(5, 94, 131, 0.25);
+  border-top-color: #055e83;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+/* CARD */
+.recipe-card {
+  background: var(--surface-strong);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 12px 24px rgba(148, 163, 184, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.recipe-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 28px rgba(148, 163, 184, 0.2);
+}
+.recipe-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+.recipe-content {
+  padding: 15px;
+}
+.badge {
+  display: inline-block;
+  background: #ffe0be;
+  color: #8a3800;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+.missing {
+  color: #b91c1c;
+  font-size: 13px;
+}
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: var(--surface-strong);
+  padding: 20px;
+  max-width: 600px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  position: relative;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #64748b;
+}
+.close-btn:hover {
+  color: #0f172a;
+}
+
+.back-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--primary);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.back-btn:hover {
+  background: var(--primary-hover);
+}
+@media (max-width: 640px) {
+  body {
+    padding: 14px;
+  }
+  .input-section {
+    flex-direction: column;
+  }
+  .search-btn {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+<a class="back-btn" href="scratch.html">Back to Projects</a>
+<div class="container">
+<h1>Smart Recipe Finder</h1>
+<p class="subtitle">Use what you have. Cook what you love.</p>
+<div class="input-section">
+  <input list="ingredientsList" id="input" placeholder="Add ingredient...">
+  <button onclick="add()">Add</button>
+</div>
+<datalist id="ingredientsList">
+  <option value="chicken">
+  <option value="rice">
+  <option value="eggs">
+  <option value="milk">
+  <option value="cheese">
+  <option value="butter">
+  <option value="flour">
+</datalist>
+<div class="pantry">
+  <button onclick="quick('eggs')">Eggs</button>
+  <button onclick="quick('milk')">Milk</button>
+  <button onclick="quick('butter')">Butter</button>
+  <button onclick="quick('cheese')">Cheese</button>
+  <button onclick="quick('flour')">Flour</button>
+  <button onclick="quick('sugar')">Sugar</button>
+  <button onclick="quick('salt')">Salt</button>
+  <button onclick="quick('pepper')">Pepper</button>
+  <button onclick="quick('olive oil')">Olive Oil</button>
+  <button onclick="quick('garlic')">Garlic</button>
+  <button onclick="quick('onion')">Onion</button>
+  <button onclick="quick('rice')">Rice</button>
+  <button onclick="quick('pasta')">Pasta</button>
+  <button onclick="quick('bread')">Bread</button>
+  <button onclick="quick('chicken')">Chicken</button>
+  <button onclick="quick('ground beef')">Ground Beef</button>
+</div>
+<div id="tags"></div>
+<div class="filters">
+  <button onclick="time(15,this)">15m</button>
+  <button onclick="time(30,this)">30m</button>
+  <button onclick="time(60,this)">60m</button>
+</div>
+<div class="search-row">
+  <button class="search-btn" onclick="search()">Find Recipes</button>
+</div>
+<div class="recipes" id="recipes" aria-live="polite"></div>
+</div>
+<script>
+let items = [];
+let maxTime = 60;
+function setRecipeStatus(type, message) {
+  const classes = type ? `status-card ${type}` : "status-card";
+  const loader = type === "loading" ? '<span class="spinner"></span>' : "";
+  recipes.innerHTML = `<div class="${classes}">${loader}${message}</div>`;
+}
+function add() {
+  const val = input.value.trim().toLowerCase();
+  if (!val) return;
+  items.push(val);
+  input.value = "";
+  render();
+}
+function quick(x){
+  items.push(x);
+  render();
+}
+function render(){
+  tags.innerHTML = "";
+  items.forEach((x, i) => {
+    const t = document.createElement("span");
+    t.className = "tag";
+    t.innerText = x + " x";
+    t.onclick = () => {items.splice(i, 1); render();};
+    tags.appendChild(t);
+  });
+}
+function time(t, btn){
+  maxTime = t;
+  document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+}
+async function search(){
+  const key = "ede64503da174d4bb0e849ce36334925";
+  if (!items.length) {
+    setRecipeStatus("", "Add a few ingredients, then click Find Recipes to get started.");
+    return;
+  }
+  setRecipeStatus("loading", "Finding your best recipe matches...");
+  try {
+    const res = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${items.join(",")}&number=20&apiKey=${key}`);
+    if (!res.ok) {
+      throw new Error("Recipe service returned an error.");
+    }
+    let data = await res.json();
+    if (!Array.isArray(data)) {
+      throw new Error("Unexpected recipe data format.");
+    }
+    data = data.map(r => {
+      const total = r.usedIngredientCount + r.missedIngredientCount;
+      const match = total ? r.usedIngredientCount / total : 0;
+      return {...r, match};
+    });
+    data.sort((a, b) => {
+      if (b.match !== a.match) return b.match - a.match;
+      return a.missedIngredientCount - b.missedIngredientCount;
+    });
+    if (!data.length) {
+      setRecipeStatus("", "No recipes found for those ingredients. Try adding 1-2 more.");
+      return;
+    }
+    show(data);
+  } catch (err) {
+    setRecipeStatus("error", "Couldn't load recipes right now. Please try again in a moment.");
+  }
+}
+function show(data){
+  recipes.innerHTML = "";
+  data.forEach(r => {
+    const card = document.createElement("div");
+    card.className = "recipe-card";
+    const percent = Math.round(r.match * 100);
+    const missingList = r.missedIngredients.map(i => i.name).join(", ");
+    card.innerHTML = `
+      <img src="${r.image}">
+      <div class="recipe-content">
+        <div class="badge">${percent}% match</div>
+        <h3>${r.title}</h3>
+        <p class="missing"><strong>Missing:</strong> ${missingList || "None"}</p>
+      </div>
+    `;
+    card.onclick = () => details(r.id);
+    recipes.appendChild(card);
+  });
+}
+async function details(id){
+  const key = "ede64503da174d4bb0e849ce36334925";
+  let d;
+  try {
+    const res = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${key}`);
+    if (!res.ok) {
+      throw new Error("Recipe details request failed.");
+    }
+    d = await res.json();
+  } catch (err) {
+    const modal = document.createElement("div");
+    modal.className = "modal";
+    modal.innerHTML = `
+    <div class="modal-content">
+      <span class="close-btn" onclick="this.closest('.modal').remove()">x</span>
+      <h2>Recipe unavailable</h2>
+      <p>We couldn't load recipe details right now. Please try again.</p>
+    </div>`;
+    document.body.appendChild(modal);
+    return;
+  }
+  const modal = document.createElement("div");
+  modal.className = "modal";
+  modal.innerHTML = `
+  <div class="modal-content">
+    <span class="close-btn" onclick="this.closest('.modal').remove()">x</span>
+    <h2>${d.title}</h2>
+    <img src="${d.image}" style="width:100%;border-radius:12px;">
+    <h3>Ingredients</h3>
+    <ul>
+      ${d.extendedIngredients.map(i => `<li>${i.original}</li>`).join("")}
+    </ul>
+    <h3>Steps</h3>
+    ${(d.analyzedInstructions[0]?.steps || []).map(s => `
+      <label><input type="checkbox"> ${s.step}</label><br>
+    `).join("")}
+  </div>`;
+  document.body.appendChild(modal);
+}
+setRecipeStatus("", "Add a few ingredients, then click Find Recipes to get started.");
+</script>
+</body>
+</html>

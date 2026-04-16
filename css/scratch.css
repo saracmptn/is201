@@ -1,0 +1,239 @@
+:root {
+    --bg-top: #e9f1fb;
+    --bg-bottom: #f7faff;
+    --ink: #1f2a44;
+    --muted: #4d5f7b;
+    --line: rgba(105, 133, 164, 0.28);
+    --accent: #2c7fb8;
+    --accent-soft: #e8f2fb;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "Nunito", "Segoe UI", Tahoma, sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 12% 10%, rgba(189, 227, 255, 0.75), transparent 42%),
+        radial-gradient(circle at 88% 18%, rgba(216, 230, 246, 0.55), transparent 44%),
+        linear-gradient(170deg, var(--bg-top), var(--bg-bottom));
+    line-height: 1.7;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    background-color: rgba(249, 252, 255, 0.9);
+    border-bottom: 1px solid var(--line);
+}
+
+.nav-bar {
+    list-style: none;
+    display: flex;
+    gap: 0.7rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 1rem 1.2rem;
+}
+
+.nav-bar a {
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-bar a:hover {
+    background-color: var(--accent-soft);
+    color: var(--accent);
+}
+
+.hero {
+    text-align: center;
+    max-width: 1100px;
+    margin: 2.2rem auto 0;
+    padding: 4.2rem 2rem 3.2rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.hero-kicker {
+    margin: 0;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #43698d;
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+h1,
+h2,
+h3 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+h1 {
+    margin: 0.55rem 0 0.85rem;
+    font-size: clamp(2.4rem, 4.8vw, 4rem);
+    color: #1e355d;
+}
+
+.hero-subtitle {
+    margin: 0 auto;
+    font-size: clamp(1.16rem, 2vw, 1.42rem);
+    max-width: 42ch;
+    color: var(--muted);
+}
+
+main {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 1.4rem 3rem;
+}
+
+.panel {
+    margin: 0;
+    padding: clamp(1.75rem, 3vw, 2.5rem) 0;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 0.7rem;
+    font-size: clamp(1.8rem, 3.1vw, 2.35rem);
+    color: #234a77;
+}
+
+.panel p,
+li {
+    font-size: 1.12rem;
+}
+
+#steps ol {
+    margin: 1rem 0 0;
+    padding-left: 1.6rem;
+}
+
+#steps li {
+    margin-bottom: 1rem;
+}
+
+#steps h3 {
+    margin: 0 0 0.3rem;
+    font-size: 1.35rem;
+    color: #2f4568;
+}
+
+#steps ul {
+    margin-top: 0.35rem;
+    padding-left: 1.25rem;
+}
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.image-card {
+    text-align: center;
+    padding: 0.4rem;
+}
+
+.image-card img {
+    width: 100%;
+    max-width: 380px;
+    min-height: 280px;
+    object-fit: cover;
+    border-radius: 18px;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.image-card p {
+    margin: 0.85rem 0 0.25rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #264c78;
+}
+
+.video-container {
+    width: 100%;
+    max-width: 1060px;
+    margin: 1rem auto 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(37, 70, 108, 0.14);
+    border: 1px solid rgba(121, 152, 180, 0.32);
+}
+
+.video-container iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+}
+
+.tableau-wrap {
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 1150px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(121, 152, 180, 0.32);
+    box-shadow: 0 10px 24px rgba(37, 70, 108, 0.12);
+}
+
+.tableauPlaceholder,
+.tableauViz {
+    width: 100%;
+}
+
+footer {
+    text-align: center;
+    padding: 1.1rem;
+    font-size: 1rem;
+    color: #4f6581;
+}
+
+@media (max-width: 760px) {
+    .hero {
+        margin: 1.4rem 0.9rem 0;
+        padding: 3rem 1.2rem 2.4rem;
+    }
+
+    .nav-bar {
+        justify-content: flex-start;
+    }
+
+    .panel {
+        padding: 1.35rem 0;
+    }
+
+    .image-card img {
+        min-height: 235px;
+    }
+
+    .panel p,
+    li {
+        font-size: 1.03rem;
+    }
+}

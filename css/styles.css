@@ -10957,6 +10957,13 @@ section.resume-section .resume-section-content {
   width: 100%;
 }
 
+#about {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.82) 62%, rgba(255, 255, 255, 0.96) 88%, rgba(255, 255, 255, 1) 100%), url("../assets/img/mountainphoto.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 @media (min-width: 768px) {
   section.resume-section {
     min-height: 100vh;
